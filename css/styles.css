@@ -13,7 +13,7 @@
   width: 100%;
   height: 100vh;
   text-align: center;
-  background-image: url("../assets/images/header.jpg");
+  background-image: url("../assets/images/header.png");
   background-size: cover;
   background-repeat: round;
   color: white;
@@ -46,6 +46,7 @@
   width: 15%;
   display: flex;
   margin-right: 2em;
+  list-style: none;
 }
 
 .header-ul {
@@ -109,6 +110,7 @@
   width: 15%;
   display: flex;
   margin-bottom: 1em;
+  list-style: none;
 }
 
 .footer-license {
@@ -138,5 +140,6 @@
 
   .footer-container {
     align-items: baseline;
+    text-align: initial;
   }
 }
