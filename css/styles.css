@@ -1,34 +1,98 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css");
 @import "resets/reset.css";
 
-  body {
+.home-template {
+    margin: 0;  
     font-family: "Lato", sans-serif;
     font-size: 1rem;
-  }
+    background-color: white;
+}
 
-  main {
-    max-width: 900px;
-    margin: auto;
-    padding: 0.5rem;
+.header-container {
+    width: 100%;
+    height: 100vh;
     text-align: center;
-  }
-  
-  nav {
+    background-image: url("../assets/images/header.jpg");
+    background-size: cover;
+    background-repeat: round;
+    color: white;
+    opacity: 0.9;
+}
+
+.header-navigation-bar{
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+    color: white;
+    height: 5em;
+    cursor: pointer;
+    opacity: 0.8;
+}
 
-  ul {
+.header-social-media  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 15%;
+    display: flex;
+    margin-right: 2em;
+}
+
+.header-ul {
     list-style: none;
     display: flex;
-  }
-  
-  li {
+    cursor: pointer;
+}
+
+.header-li {
     margin-right: 1rem;
-  }
-  h1 {
-    color: #e74c3c;
-    margin-bottom: 0.5rem;
-  }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    font-family: "Lato", sans-serif;
+    list-style: 1.65;
+}
+
+.footer-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 2em 0 2em 0;
+    align-items: center;
+}
+
+i {
+    border: none;
+    color: white;
+    font-size: 32px;
+}
+
+.footer-social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 15%;
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.footer-license {
+    margin-left: 3em;;
+}
+
+
