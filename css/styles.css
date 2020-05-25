@@ -5,7 +5,6 @@
 .home-template {
   margin: 0;
   font-family: "Lato", sans-serif;
-  font-size: 1rem;
   background-color: white;
 }
 
@@ -26,7 +25,7 @@
   background-color: black;
   justify-content: space-between;
   align-items: center;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .header-navigation {
@@ -47,6 +46,8 @@
   display: flex;
   margin-right: 2em;
   list-style: none;
+  outline: none;
+
 }
 
 .header-ul {
@@ -81,7 +82,7 @@
 }
 
 .article {
-  line-height: 1.6;
+  line-height: 1.8;
   font-size: 16px;
   text-align: justify;
 }
@@ -111,6 +112,7 @@
   display: flex;
   margin-bottom: 1em;
   list-style: none;
+  outline: none;
 }
 
 .footer-license {
@@ -118,8 +120,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .home-template {
+      width: 100%;
+  }
+
   .header-container {
-      height: 70vh;
+    height: 70vh;
   }
 
   .header-navigation-bar {
@@ -127,7 +133,7 @@
   }
 
   .content {
-    width: 70%;
+    width: 80%;
   }
 
   .header-social-media {
