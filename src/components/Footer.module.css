@@ -1,0 +1,206 @@
+.footer {
+  margin-top: var(--space-8);
+  background: var(--color-bg);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  container-type: inline-size;
+}
+
+.copy {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.cvLink {
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  color: var(--color-text);
+  background: var(--color-surface-alt);
+}
+
+.cvLink:hover {
+  background: color-mix(in srgb, var(--color-surface) 78%, var(--color-success) 22%);
+}
+
+.animationRow {
+  padding-bottom: var(--space-5);
+  display: flex;
+  justify-content: center;
+}
+
+.sleepingCat {
+  width: min(15rem, 100%);
+  height: auto;
+  overflow: visible;
+  transform-origin: center bottom;
+  animation: cat-breathe 2600ms ease-in-out infinite;
+}
+
+.catBody,
+.catFace,
+.catEar,
+.catTail {
+  fill: var(--cat-main);
+}
+
+.catBody {
+  fill: var(--cat-body);
+}
+
+.catTail {
+  fill: none;
+  stroke: var(--cat-main);
+  stroke-width: 9;
+  stroke-linecap: round;
+  transform-origin: 68px 88px;
+  animation: tail-swish 1700ms ease-in-out infinite;
+}
+
+.catPaw {
+  fill: none;
+  stroke: color-mix(in srgb, var(--cat-main) 75%, var(--cat-paw-highlight) 25%);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.catHead {
+  transform-origin: 155px 62px;
+  animation: head-nod 2600ms ease-in-out infinite;
+}
+
+.sleepingEye,
+.catMouth {
+  fill: none;
+  stroke: var(--color-surface-alt);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: opacity 200ms ease;
+}
+
+.catNose {
+  fill: var(--cat-nose);
+}
+
+.awakeEye {
+  fill: var(--cat-eye);
+  stroke: var(--cat-eye-stroke);
+  stroke-width: 1.2;
+  opacity: 0;
+  transform: scale(0.5);
+  transform-origin: center;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.zzz text {
+  fill: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  animation: zzz-float 2200ms ease-in-out infinite;
+}
+
+.zzz text:nth-child(2) {
+  animation-delay: 180ms;
+}
+
+.zzz text:nth-child(3) {
+  animation-delay: 340ms;
+}
+
+.sleepingCat:hover,
+.sleepingCat:focus-visible {
+  animation-duration: 1800ms;
+}
+
+.sleepingCat:hover .catTail,
+.sleepingCat:focus-visible .catTail {
+  animation-duration: 800ms;
+}
+
+.footer:has(.cvLink:is(:hover, :focus-visible, :active)) .sleepingEye,
+.sleepingCat:hover .sleepingEye,
+.sleepingCat:focus-visible .sleepingEye {
+  opacity: 0;
+}
+
+.footer:has(.cvLink:is(:hover, :focus-visible, :active)) .awakeEye,
+.sleepingCat:hover .awakeEye,
+.sleepingCat:focus-visible .awakeEye {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes cat-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.12rem);
+  }
+}
+
+@keyframes tail-swish {
+  0%,
+  100% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+  }
+}
+
+@keyframes head-nod {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes zzz-float {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+@container (max-width: 42rem) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .cvLink {
+    width: 100%;
+    text-align: center;
+  }
+}

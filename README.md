@@ -1,43 +1,74 @@
-# Astro Starter Kit: Minimal
+# Miguel Suarez Personal Site
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal website built with Astro and React, focused on writing, talks, and projects.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tech Stack
 
-## 🚀 Project Structure
+- Astro 6
+- React 19 via Astro React integration
+- TypeScript
+- CSS Modules + global CSS tokens
 
-Inside of your Astro project, you'll see the following folders and files:
+## Architecture
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+This project follows a layout-plus-pages architecture with one interactive React island:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+1. Layout shell
+- `src/layouts/BaseLayout.astro` wraps every page with document metadata, theme initialization, global styles, header, footer, and the cookie consent modal mount point.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+2. Route pages
+- `src/pages/*.astro` files are top-level routes (`/`, `/about`, `/blog`, `/speaking`, `/projects`).
+- Each page composes semantic sections (`section`, `h1`, `h2`, cards) and reuses shared layout styles.
 
-Any static assets, like images, can be placed in the `public/` directory.
+3. Reusable Astro components
+- `src/components/Header.astro`, `NavMenu.astro`, `Footer.astro`, and `SocialLinks.astro` provide site chrome and navigation.
+- Component styles are isolated with `*.module.css` files.
 
-## 🧞 Commands
+4. Interactive React island
+- `src/components/CookieConsentModal.tsx` is a client-side React component loaded with `client:load`.
+- It handles consent persistence in `localStorage`, focus trapping, and keyboard interactions.
 
-All commands are run from the root of the project, from a terminal:
+5. Centralized content/config
+- `src/data/site.ts` stores site metadata, nav items, social links, and CV path.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+6. Styling system
+- `src/styles/global.css` defines design tokens (colors, spacing), light/dark themes, resets, accessibility helpers, and shared utility classes.
+- CSS Modules handle component-local styles to avoid style leakage.
 
-## 👀 Want to learn more?
+## Rendering Strategy: SSG, SSR, ISR, CSR
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Current behavior in this repository:
+
+- SSG: Yes (primary mode)
+	- Astro is running in static output mode because no server adapter or server output mode is configured in `astro.config.mjs`.
+	- Pages in `src/pages/*.astro` are pre-rendered at build time.
+
+- SSR: No (not currently enabled)
+	- There is no SSR adapter and no server output configuration.
+
+- ISR: No (not currently enabled)
+	- Astro does not provide Next.js-style ISR by default in this static setup.
+	- Equivalent on-demand/server rendering patterns would require switching to server output and an adapter strategy.
+
+- CSR: Partial (islands only)
+	- The site is not a full CSR SPA.
+	- Client-side rendering/hydration happens only for interactive islands, currently the cookie consent modal via `client:load`.
+
+In short: this project is primarily SSG with selective CSR islands.
+
+## Commands
+
+All commands are run from project root:
+
+| Command | Action |
+| :------ | :----- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start local dev server |
+| `npm run build` | Build static production output |
+| `npm run preview` | Preview production build locally |
+| `npm run astro -- --help` | Show Astro CLI help |
+
+## Testing
+
+There is currently no automated test setup in this repository (no test scripts or test config files).
+

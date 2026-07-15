@@ -1,0 +1,22 @@
+.header {
+  background: var(--color-bg);
+}
+
+.headerInner {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-4);
+  container-type: inline-size;
+}
+
+.brand {
+  font-size: clamp(1.28rem, 1.08rem + 0.62vw, 1.72rem);
+  font-family: "Ananda Black", "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}

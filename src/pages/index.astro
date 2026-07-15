@@ -1,17 +1,382 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../data/site";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+  <section class="center-hero" aria-labelledby="home-title">
+    <img
+      src="/images/profile.jpg"
+      alt="Milena Suárez profile photo"
+      width="172"
+      height="172"
+      class="hero-avatar"
+    />
+    <p class="hero-lead">
+      I build scalable frontend products through
+      <strong> web development</strong> and
+      <strong> interface architecture</strong>.
+      I also enjoy <strong>mentoring engineers</strong> and helping teams ship with confidence.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/projects">View My Work</a>
+      <a class="btn btn-ghost" href="/about">About Me</a>
+    </div>
+    <div class="quick-links" aria-label="Social links">
+      <a href={siteConfig.social.github} rel="me noreferrer" target="_blank">GitHub</a>
+      <a href={siteConfig.social.linkedin} rel="me noreferrer" target="_blank">LinkedIn</a>
+      <a href={siteConfig.social.email}>Email</a>
+    </div>
+  </section>
+
+  <section class="feature-section" aria-labelledby="home-highlights">
+    <div class="section-head">
+      <h2 id="home-highlights">Featured Work</h2>
+      <p>A snapshot of recent projects, workshops, and shipping priorities.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card reveal reveal-1">
+        <div class="card-top">
+          <p class="card-kicker">Project</p>
+          <span class="card-dot" aria-hidden="true">+</span>
+        </div>
+        <h3>Design system modernization for product teams</h3>
+        <p>Migrated shared UI primitives and reduced duplicate implementation across squads.</p>
+        <p class="card-meta">2026 - Present</p>
+        <a href="/projects">Learn more</a>
+      </article>
+      <article class="feature-card reveal reveal-2">
+        <div class="card-top">
+          <p class="card-kicker">Project</p>
+          <span class="card-dot" aria-hidden="true">+</span>
+        </div>
+        <h3>Frontend architecture playbook and onboarding</h3>
+        <p>Created a practical guide for patterns, review standards, and delivery workflows.</p>
+        <p class="card-meta">2025 - 2026</p>
+        <a href="/about">Learn more</a>
+      </article>
+      <article class="feature-card reveal reveal-3">
+        <div class="card-top">
+          <p class="card-kicker">Project</p>
+          <span class="card-dot" aria-hidden="true">+</span>
+        </div>
+        <h3>Workshop series on accessibility and performance</h3>
+        <p>Hands-on team sessions focused on measurable UX and faster rendering paths.</p>
+        <p class="card-meta">2024 - Present</p>
+        <a href="/speaking">Learn more</a>
+      </article>
+      <article class="feature-card reveal reveal-4">
+        <div class="card-top">
+          <p class="card-kicker">Project</p>
+          <span class="card-dot" aria-hidden="true">+</span>
+        </div>
+        <h3>Content and writing practice for engineering teams</h3>
+        <p>Technical writing and internal docs to improve consistency and reduce team friction.</p>
+        <p class="card-meta">2024 - Present</p>
+        <a href="/blog">Learn more</a>
+      </article>
+    </div>
+    <div class="section-cta">
+      <a class="btn btn-ghost" href="/projects">View Full Experience</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .center-hero {
+    position: relative;
+    margin-bottom: 2.8rem;
+    border-radius: 1.15rem;
+    padding: 1.7rem 1rem 1.35rem;
+    text-align: center;
+  }
+
+  .hero-avatar {
+    display: block;
+    width: 172px;
+    height: auto;
+    margin: 0 auto 0.9rem;
+    border-radius: 999px;
+    border: 4px solid color-mix(in srgb, var(--color-surface) 52%, #38bdf8 48%);
+    background: linear-gradient(145deg, #bae6fd, #fde68a);
+    animation: bob 4s ease-in-out infinite;
+  }
+
+  .center-hero h1 {
+    margin: 0;
+    font-family: "Ananda Black", "Segoe UI", sans-serif;
+    font-size: clamp(2.1rem, 6vw, 3.7rem);
+    line-height: 1.05;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.2rem;
+  }
+
+  .hero-lead {
+    margin: 0.9rem auto 0;
+    max-width: 60ch;
+    color: var(--color-muted);
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+  }
+
+  .hero-lead strong {
+    color: var(--color-text);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    padding: 0.6rem 1.05rem;
+    text-decoration: none;
+    font-weight: 650;
+  }
+
+  .btn-primary {
+    background: linear-gradient(120deg, #0284c7, #0369a1);
+    color: #f8fafc;
+    box-shadow: 0 10px 24px rgb(2 132 199 / 24%);
+  }
+
+  .btn-primary:hover {
+    color: #fff;
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    border-color: var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 86%, var(--color-accent) 14%);
+    color: var(--color-text);
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+
+  .quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .quick-links a {
+    text-decoration: none;
+    border: 1px dashed var(--color-border);
+    border-radius: 999px;
+    padding: 0.24rem 0.7rem;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .quick-links a:hover {
+    color: var(--color-link);
+    border-color: var(--color-link);
+  }
+
+  .availability {
+    display: inline-flex;
+    margin: 1rem 0 0;
+    padding: 0.36rem 0.78rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 90%, var(--color-success) 10%);
+    margin: 0;
+    font-size: 0.83rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--color-success);
+  }
+
+  .feature-section {
+    margin-top: 0.3rem;
+  }
+
+  .section-head {
+    margin: 0 auto 1.2rem;
+    text-align: center;
+    max-width: 42rem;
+  }
+
+  .section-head h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.9vw, 2rem);
+  }
+
+  .section-head p {
+    margin: 0.4rem 0 0;
+    color: var(--color-muted);
+  }
+
+  .feature-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .feature-card {
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 90%, white 10%), var(--color-surface));
+    padding: 1rem 1rem 1.1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-kicker {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-success);
+  }
+
+  .card-dot {
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg) 10%);
+    font-weight: 700;
+  }
+
+  .feature-card h3 {
+    margin: 0.35rem 0 0;
+    font-size: 1.08rem;
+    line-height: 1.35;
+  }
+
+  .feature-card p {
+    color: var(--color-muted);
+  }
+
+  .card-meta {
+    margin: 0.65rem 0 0;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: color-mix(in srgb, var(--color-muted) 75%, var(--color-text) 25%);
+  }
+
+  .feature-card a {
+    display: inline-block;
+    margin-top: 0.55rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .section-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .collab {
+    margin-top: 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background:
+      linear-gradient(132deg, rgb(2 132 199 / 11%), transparent 60%),
+      linear-gradient(180deg, var(--color-surface), color-mix(in srgb, var(--color-surface) 78%, var(--color-bg) 22%));
+    padding: 1.1rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .collab h2 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  }
+
+  .collab p {
+    margin: 0.6rem 0 0;
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+
+  .collab-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: reveal-up 700ms ease forwards;
+  }
+
+  .reveal-2 {
+    animation-delay: 130ms;
+  }
+
+  .reveal-3 {
+    animation-delay: 250ms;
+  }
+
+  .reveal-4 {
+    animation-delay: 370ms;
+  }
+
+  @keyframes bob {
+    0% {
+      transform: translateY(0px) rotate(-1.5deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(1.5deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(-1.5deg);
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 53rem) {
+    .center-hero {
+      padding: 2rem 2rem 1.5rem;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-avatar,
+    .reveal {
+      animation: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
+</style>

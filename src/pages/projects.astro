@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Projects">
+  <section class="page-intro" aria-labelledby="projects-title">
+    <h1 id="projects-title">Projects</h1>
+    <p>Selected work across design systems, frontend platforms, and tooling.</p>
+  </section>
+
+  <section aria-labelledby="projects-list">
+    <h2 id="projects-list">Featured work</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Component Library</h3>
+        <p>Reusable UI primitives with accessibility and strong DX conventions.</p>
+      </article>
+      <article class="card">
+        <h3>Token Pipeline</h3>
+        <p>Automated design token distribution across web and mobile platforms.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

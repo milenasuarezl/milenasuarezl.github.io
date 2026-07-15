@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Blog">
+  <section class="page-intro" aria-labelledby="blog-title">
+    <h1 id="blog-title">Blog</h1>
+    <p>Notes and long-form writing on frontend engineering and product craft.</p>
+  </section>
+
+  <section aria-labelledby="blog-list">
+    <h2 id="blog-list">Latest Posts</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Design Systems at Scale</h3>
+        <p>How to keep consistency and speed as teams and products grow.</p>
+      </article>
+      <article class="card">
+        <h3>Practical Web Performance</h3>
+        <p>A checklist for improving user-perceived speed without overengineering.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

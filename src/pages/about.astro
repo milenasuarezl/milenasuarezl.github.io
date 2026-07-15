@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About">
+  <section class="page-intro" aria-labelledby="about-title">
+    <h1 id="about-title">About</h1>
+    <p>
+      I build web products with a focus on performance, accessibility, and clean
+      system design.
+    </p>
+  </section>
+
+  <section aria-labelledby="about-details">
+    <h2 id="about-details">What I care about</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Accessibility first</h3>
+        <p>Semantic HTML, keyboard support, and robust contrast decisions.</p>
+      </article>
+      <article class="card">
+        <h3>Maintainability</h3>
+        <p>Separation of concerns, reusable components, and clear conventions.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+import styles from "./NavMenu.module.css";
+import { siteConfig } from "../data/site";
+
+const pathname = Astro.url.pathname;
+---
+
+<nav aria-label="Main navigation" class={styles.nav} data-nav-root>
+  <div class={styles.controls}>
+    <button
+      type="button"
+      class={styles.iconButton}
+      data-theme-toggle
+      aria-label="Switch to dark mode"
+      title="Toggle color theme"
+    >
+      <svg class={styles.iconSun} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 3a1 1 0 0 1 1 1v1.27a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 14.73a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.27a1 1 0 0 1 1-1Zm9-5.73a1 1 0 0 1-1 1h-1.27a1 1 0 1 1 0-2H20a1 1 0 0 1 1 1ZM6.27 13a1 1 0 1 1 0-2H4a1 1 0 1 1 0 2h2.27Zm11.1 5.51a1 1 0 0 1-1.41 0l-.9-.9a1 1 0 1 1 1.41-1.41l.9.9a1 1 0 0 1 0 1.41ZM8.94 8.94a1 1 0 0 1-1.41 0l-.9-.9a1 1 0 0 1 1.41-1.41l.9.9a1 1 0 0 1 0 1.41Zm8.53 0a1 1 0 0 1 0-1.41l.9-.9a1 1 0 1 1 1.41 1.41l-.9.9a1 1 0 0 1-1.41 0ZM8.04 17.61a1 1 0 1 1-1.41-1.41l.9-.9a1 1 0 0 1 1.41 1.41l-.9.9ZM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" />
+      </svg>
+      <svg class={styles.iconMoon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M11.14 2.05a1 1 0 0 1 1.19 1.36 8.5 8.5 0 0 0 8.26 11.73 1 1 0 0 1 .77 1.65A10.5 10.5 0 1 1 10.77 1.92a1 1 0 0 1 .37.13Zm-1.47 2.62a8.5 8.5 0 1 0 8.89 11.76A10.5 10.5 0 0 1 9.67 4.67Z" />
+      </svg>
+      <span class="sr-only">Toggle theme</span>
+    </button>
+
+    <button
+      type="button"
+      class={`${styles.iconButton} ${styles.menuToggle}`}
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="site-nav-list"
+    >
+      <span class="sr-only">Toggle navigation menu</span>
+      <span class={styles.menuLine}></span>
+      <span class={styles.menuLine}></span>
+      <span class={styles.menuLine}></span>
+    </button>
+  </div>
+
+  <ul id="site-nav-list" class={styles.list} data-menu>
+    {
+      siteConfig.navItems.map((item) => {
+        const isActive = pathname === item.href;
+        return (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive ? "page" : undefined}
+              class={styles.link}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<script is:inline>
+  (() => {
+    const navRoot = document.querySelector("[data-nav-root]");
+    if (!navRoot) return;
+
+    const menuButton = navRoot.querySelector("[data-menu-toggle]");
+    const menu = navRoot.querySelector("[data-menu]");
+    const themeButton = navRoot.querySelector("[data-theme-toggle]");
+    const mobileMedia = window.matchMedia("(max-width: 42rem)");
+    const themeStorageKey = "theme-preference";
+
+    const setMenuState = (isOpen) => {
+      navRoot.dataset.menuOpen = isOpen ? "true" : "false";
+      menuButton?.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    };
+
+    setMenuState(false);
+
+    menuButton?.addEventListener("click", () => {
+      const currentState = navRoot.dataset.menuOpen === "true";
+      setMenuState(!currentState);
+    });
+
+    const closeMenuOnMobile = () => {
+      if (mobileMedia.matches) {
+        setMenuState(false);
+      }
+    };
+
+    menu?.addEventListener("click", (event) => {
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest("a")) {
+        closeMenuOnMobile();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenuOnMobile();
+      }
+    });
+
+    const applyTheme = (theme) => {
+      document.documentElement.dataset.theme = theme;
+      const nextTheme = theme === "dark" ? "light" : "dark";
+      themeButton?.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
+      themeButton?.setAttribute("title", `Switch to ${nextTheme} mode`);
+    };
+
+    const getStoredTheme = () => {
+      const value = localStorage.getItem(themeStorageKey);
+      return value === "light" || value === "dark" ? value : null;
+    };
+
+    const currentTheme = getStoredTheme() ?? document.documentElement.dataset.theme ?? "light";
+    applyTheme(currentTheme);
+
+    themeButton?.addEventListener("click", () => {
+      const activeTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      const nextTheme = activeTheme === "dark" ? "light" : "dark";
+      localStorage.setItem(themeStorageKey, nextTheme);
+      applyTheme(nextTheme);
+    });
+  })();
+</script>

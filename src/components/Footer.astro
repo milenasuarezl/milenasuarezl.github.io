@@ -1,0 +1,48 @@
+---
+import styles from "./Footer.module.css";
+import SocialLinks from "./SocialLinks.astro";
+import { siteConfig } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class={styles.footer}>
+  <div class={`container ${styles.inner}`}>
+    <p class={styles.copy}>
+      &copy; {year} {siteConfig.copyrightName}. All rights reserved.
+    </p>
+    <div class={styles.actions}>
+      <a href={siteConfig.cvPath} download class={styles.cvLink}>
+        Download CV
+      </a>
+      <SocialLinks />
+    </div>
+  </div>
+  <div class={`container ${styles.animationRow}`} aria-hidden="true">
+    <svg class={styles.sleepingCat} viewBox="0 0 220 120">
+      <g class={styles.zzz}>
+        <text x="188" y="35">z</text>
+        <text x="197" y="25">z</text>
+        <text x="205" y="15">z</text>
+      </g>
+      <path
+        class={styles.catTail}
+        d="M43 88c-16 3-25 14-23 22 2 8 12 9 20 3 8-6 14-9 25-8"
+      />
+      <ellipse class={styles.catBody} cx="110" cy="84" rx="62" ry="30" />
+      <path class={styles.catPaw} d="M88 101c8 5 19 5 27 0" />
+      <path class={styles.catPaw} d="M122 101c8 5 19 5 27 0" />
+      <g class={styles.catHead}>
+        <polygon class={styles.catEar} points="130,49 141,31 150,50" />
+        <polygon class={styles.catEar} points="162,50 171,32 182,49" />
+        <ellipse class={styles.catFace} cx="155" cy="62" rx="30" ry="24" />
+        <path class={styles.sleepingEye} d="M143 62q6 5 12 0" />
+        <path class={styles.sleepingEye} d="M156 62q6 5 12 0" />
+        <circle class={styles.awakeEye} cx="148" cy="61" r="3.8" />
+        <circle class={styles.awakeEye} cx="162" cy="61" r="3.8" />
+        <path class={styles.catMouth} d="M152 72q3 3 6 0" />
+        <circle class={styles.catNose} cx="155" cy="68" r="2.5" />
+      </g>
+    </svg>
+  </div>
+</footer>

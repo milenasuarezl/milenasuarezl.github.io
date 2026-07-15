@@ -1,0 +1,14 @@
+---
+import NavMenu from "./NavMenu.astro";
+import styles from "./Header.module.css";
+import { siteConfig } from "../data/site";
+---
+
+<header class={styles.header}>
+  <div class={`container ${styles.headerInner}`}>
+    <a href="/" class={styles.brand}>
+      {siteConfig.name}
+    </a>
+    <NavMenu />
+  </div>
+</header>
