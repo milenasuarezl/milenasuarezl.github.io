@@ -1,382 +1,256 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteConfig } from "../data/site";
+import { jobs } from "../data/experience";
+
+const currentJob = jobs[0];
+const currentHighlights = [
+  "WCAG 2.2 audits and fixes across 30+ design system components",
+  "Design token workflows with Figma, Supernova, and Style Dictionary",
+  "Faster, cheaper visual regression testing and CI/CD for the team",
+];
+
+const services = [
+  {
+    icon: "◆",
+    title: "Design systems",
+    text: "Components, tokens, and documentation that designers and engineers enjoy using, and that scale across products.",
+  },
+  {
+    icon: "◎",
+    title: "Accessibility",
+    text: "WCAG audits, inclusive patterns, and team habits that make accessibility the default, not a final checklist.",
+  },
+  {
+    icon: "▲",
+    title: "Frontend architecture",
+    text: "React and TypeScript platforms, micro frontends, and Domain-Driven Design, built to grow with the team.",
+  },
+];
+
+const stats = [
+  { value: "10+", label: "years building for the web" },
+  { value: "30+", label: "components made accessible" },
+  { value: "6", label: "industries: edtech, fintech, banking, delivery, agencies & education" },
+];
 ---
 
 <BaseLayout title="Home">
-  <section class="center-hero" aria-labelledby="home-title">
-    <img
-      src="/images/profile.jpg"
-      alt="Milena Suárez profile photo"
-      width="172"
-      height="172"
-      class="hero-avatar"
-    />
+  <section class="hero" aria-labelledby="home-title">
+    <p class="eyebrow">{siteConfig.role}</p>
+    <h1 id="home-title">
+      Interfaces that work for <span class="hero-mark">everyone.</span>
+    </h1>
     <p class="hero-lead">
-      I build scalable frontend products through
-      <strong> web development</strong> and
-      <strong> interface architecture</strong>.
-      I also enjoy <strong>mentoring engineers</strong> and helping teams ship with confidence.
+      I'm Milena, a software engineer based in Berlin, focused on frontend. I solve product problems
+      with <strong>scalable</strong> and <strong>accessible</strong> solutions — from design systems
+      to production-ready apps.
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="/projects">View My Work</a>
-      <a class="btn btn-ghost" href="/about">About Me</a>
-    </div>
-    <div class="quick-links" aria-label="Social links">
-      <a href={siteConfig.social.github} rel="me noreferrer" target="_blank">GitHub</a>
-      <a href={siteConfig.social.linkedin} rel="me noreferrer" target="_blank">LinkedIn</a>
-      <a href={siteConfig.social.email}>Email</a>
+      <a class="btn btn-primary" href="/experience">My experience</a>
+      <a class="btn btn-ghost" href="/about">About me</a>
     </div>
   </section>
 
-  <section class="feature-section" aria-labelledby="home-highlights">
+  <section class="section current" aria-labelledby="home-current">
+    <div>
+      <p class="eyebrow">Currently</p>
+      <h2 id="home-current">
+        {currentJob.role} at <span class="company">{currentJob.company}</span>
+      </h2>
+      <p class="current-since">Since {currentJob.period.replace(" – Present", "")} · Berlin</p>
+    </div>
+    <div class="current-body">
+      <p>{currentJob.summary}</p>
+      <ul class="current-list">
+        {currentHighlights.map((item) => <li>{item}</li>)}
+      </ul>
+      <a class="arrow-link" href="/experience">
+        See full experience <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="home-services">
     <div class="section-head">
-      <h2 id="home-highlights">Featured Work</h2>
-      <p>A snapshot of recent projects, workshops, and shipping priorities.</p>
+      <p class="eyebrow">What I do</p>
+      <h2 id="home-services">Where I can help</h2>
     </div>
-    <div class="feature-grid">
-      <article class="feature-card reveal reveal-1">
-        <div class="card-top">
-          <p class="card-kicker">Project</p>
-          <span class="card-dot" aria-hidden="true">+</span>
-        </div>
-        <h3>Design system modernization for product teams</h3>
-        <p>Migrated shared UI primitives and reduced duplicate implementation across squads.</p>
-        <p class="card-meta">2026 - Present</p>
-        <a href="/projects">Learn more</a>
-      </article>
-      <article class="feature-card reveal reveal-2">
-        <div class="card-top">
-          <p class="card-kicker">Project</p>
-          <span class="card-dot" aria-hidden="true">+</span>
-        </div>
-        <h3>Frontend architecture playbook and onboarding</h3>
-        <p>Created a practical guide for patterns, review standards, and delivery workflows.</p>
-        <p class="card-meta">2025 - 2026</p>
-        <a href="/about">Learn more</a>
-      </article>
-      <article class="feature-card reveal reveal-3">
-        <div class="card-top">
-          <p class="card-kicker">Project</p>
-          <span class="card-dot" aria-hidden="true">+</span>
-        </div>
-        <h3>Workshop series on accessibility and performance</h3>
-        <p>Hands-on team sessions focused on measurable UX and faster rendering paths.</p>
-        <p class="card-meta">2024 - Present</p>
-        <a href="/speaking">Learn more</a>
-      </article>
-      <article class="feature-card reveal reveal-4">
-        <div class="card-top">
-          <p class="card-kicker">Project</p>
-          <span class="card-dot" aria-hidden="true">+</span>
-        </div>
-        <h3>Content and writing practice for engineering teams</h3>
-        <p>Technical writing and internal docs to improve consistency and reduce team friction.</p>
-        <p class="card-meta">2024 - Present</p>
-        <a href="/blog">Learn more</a>
-      </article>
+    <div class="cards cards-3">
+      {
+        services.map((service) => (
+          <article class="card">
+            <span class="service-icon" aria-hidden="true">{service.icon}</span>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+          </article>
+        ))
+      }
     </div>
-    <div class="section-cta">
-      <a class="btn btn-ghost" href="/projects">View Full Experience</a>
-    </div>
+  </section>
+
+  <section class="section" aria-labelledby="home-stats">
+    <h2 id="home-stats" class="sr-only">In numbers</h2>
+    <dl class="stats">
+      {
+        stats.map((stat) => (
+          <div class="stat">
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="section closing" aria-labelledby="home-community">
+    <h2 id="home-community" class="sr-only">Community</h2>
+    <p>
+      Shaped by the <strong>BogotaJS</strong> and <strong>JSConf Colombia</strong> communities. I also
+      speak now and then — <a href="/speaking">see my talks</a>.
+    </p>
   </section>
 </BaseLayout>
 
 <style>
-  .center-hero {
-    position: relative;
-    margin-bottom: 2.8rem;
-    border-radius: 1.15rem;
-    padding: 1.7rem 1rem 1.35rem;
-    text-align: center;
+  .hero {
+    padding-block: var(--space-8) var(--space-4);
+    max-width: 52rem;
   }
 
-  .hero-avatar {
-    display: block;
-    width: 172px;
-    height: auto;
-    margin: 0 auto 0.9rem;
-    border-radius: 999px;
-    border: 4px solid color-mix(in srgb, var(--color-surface) 52%, #38bdf8 48%);
-    background: linear-gradient(145deg, #bae6fd, #fde68a);
-    animation: bob 4s ease-in-out infinite;
-  }
-
-  .center-hero h1 {
-    margin: 0;
-    font-family: "Ananda Black", "Segoe UI", sans-serif;
-    font-size: clamp(2.1rem, 6vw, 3.7rem);
+  .hero h1 {
+    margin: var(--space-3) 0 0;
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
     line-height: 1.05;
+    letter-spacing: -0.035em;
   }
 
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-top: 1.2rem;
+  .hero-mark {
+    color: var(--color-accent);
+    font-style: italic;
   }
 
   .hero-lead {
-    margin: 0.9rem auto 0;
-    max-width: 60ch;
+    margin: var(--space-5) 0 0;
+    max-width: 52ch;
     color: var(--color-muted);
-    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    font-size: clamp(1.1rem, 1.6vw, 1.25rem);
   }
 
   .hero-lead strong {
     color: var(--color-text);
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    padding: 0.6rem 1.05rem;
-    text-decoration: none;
-    font-weight: 650;
-  }
-
-  .btn-primary {
-    background: linear-gradient(120deg, #0284c7, #0369a1);
-    color: #f8fafc;
-    box-shadow: 0 10px 24px rgb(2 132 199 / 24%);
-  }
-
-  .btn-primary:hover {
-    color: #fff;
-    filter: brightness(1.05);
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost {
-    border-color: var(--color-border);
-    background: color-mix(in srgb, var(--color-surface) 86%, var(--color-accent) 14%);
-    color: var(--color-text);
-  }
-
-  .btn-ghost:hover {
-    color: var(--color-text);
-    border-color: var(--color-accent);
-  }
-
-  .quick-links {
+  .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-top: 1rem;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
   }
 
-  .quick-links a {
-    text-decoration: none;
-    border: 1px dashed var(--color-border);
-    border-radius: 999px;
-    padding: 0.24rem 0.7rem;
-    color: var(--color-muted);
-    font-size: 0.9rem;
-  }
-
-  .quick-links a:hover {
-    color: var(--color-link);
-    border-color: var(--color-link);
-  }
-
-  .availability {
-    display: inline-flex;
-    margin: 1rem 0 0;
-    padding: 0.36rem 0.78rem;
-    border-radius: 999px;
-    border: 1px solid var(--color-border);
-    background: color-mix(in srgb, var(--color-surface) 90%, var(--color-success) 10%);
-    margin: 0;
-    font-size: 0.83rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    color: var(--color-success);
-  }
-
-  .feature-section {
-    margin-top: 0.3rem;
-  }
-
-  .section-head {
-    margin: 0 auto 1.2rem;
-    text-align: center;
-    max-width: 42rem;
-  }
-
-  .section-head h2 {
-    margin: 0;
-    font-size: clamp(1.4rem, 2.9vw, 2rem);
-  }
-
-  .section-head p {
-    margin: 0.4rem 0 0;
-    color: var(--color-muted);
-  }
-
-  .feature-grid {
+  .current {
     display: grid;
-    gap: 1rem;
-  }
-
-  .feature-card {
+    gap: var(--space-5);
+    padding: var(--space-6);
     border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    background:
-      linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 90%, white 10%), var(--color-surface));
-    padding: 1rem 1rem 1.1rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
     box-shadow: var(--shadow-sm);
   }
 
-  .card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .current h2 {
+    margin: 0.25rem 0 0;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
   }
 
-  .card-kicker {
-    margin: 0;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-success);
+  .company {
+    color: var(--color-accent);
   }
 
-  .card-dot {
-    width: 1.85rem;
-    height: 1.85rem;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--color-border);
+  .current-since {
+    margin: var(--space-2) 0 0;
     color: var(--color-muted);
-    background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg) 10%);
-    font-weight: 700;
-  }
-
-  .feature-card h3 {
-    margin: 0.35rem 0 0;
-    font-size: 1.08rem;
-    line-height: 1.35;
-  }
-
-  .feature-card p {
-    color: var(--color-muted);
-  }
-
-  .card-meta {
-    margin: 0.65rem 0 0;
-    font-size: 0.86rem;
     font-weight: 600;
-    color: color-mix(in srgb, var(--color-muted) 75%, var(--color-text) 25%);
   }
 
-  .feature-card a {
-    display: inline-block;
-    margin-top: 0.55rem;
-    font-weight: 650;
-    text-decoration: none;
-  }
-
-  .section-cta {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .collab {
-    margin-top: 2rem;
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    background:
-      linear-gradient(132deg, rgb(2 132 199 / 11%), transparent 60%),
-      linear-gradient(180deg, var(--color-surface), color-mix(in srgb, var(--color-surface) 78%, var(--color-bg) 22%));
-    padding: 1.1rem;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .collab h2 {
+  .current-body p {
     margin: 0;
-    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    font-size: 1.1rem;
   }
 
-  .collab p {
-    margin: 0.6rem 0 0;
+  .current-list {
+    margin: var(--space-4) 0 0;
+    padding-left: 1.2rem;
     color: var(--color-muted);
-    max-width: 58ch;
   }
 
-  .collab-actions {
+  .current-list li + li {
+    margin-top: var(--space-1);
+  }
+
+  .arrow-link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-weight: 650;
+  }
+
+  .service-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: var(--space-3);
+    border-radius: 999px;
+    background: var(--color-accent-soft);
+    color: var(--color-accent-soft-text);
+    font-size: 1.1rem;
+  }
+
+  .stats {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding-block: var(--space-5);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .stat {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    flex-direction: column-reverse;
   }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: reveal-up 700ms ease forwards;
+  .stat dt {
+    color: var(--color-muted);
   }
 
-  .reveal-2 {
-    animation-delay: 130ms;
+  .stat dd {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
   }
 
-  .reveal-3 {
-    animation-delay: 250ms;
+  .closing p {
+    margin: 0;
+    max-width: 52ch;
+    font-size: 1.15rem;
+    color: var(--color-muted);
   }
 
-  .reveal-4 {
-    animation-delay: 370ms;
+  .closing strong {
+    color: var(--color-text);
   }
 
-  @keyframes bob {
-    0% {
-      transform: translateY(0px) rotate(-1.5deg);
-    }
-    50% {
-      transform: translateY(-8px) rotate(1.5deg);
-    }
-    100% {
-      transform: translateY(0px) rotate(-1.5deg);
-    }
-  }
-
-  @keyframes reveal-up {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (min-width: 53rem) {
-    .center-hero {
-      padding: 2rem 2rem 1.5rem;
+  @media (min-width: 48rem) {
+    .current {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: var(--space-8);
+      padding: var(--space-8);
     }
 
-    .feature-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-avatar,
-    .reveal {
-      animation: none;
-      transform: none;
-      opacity: 1;
+    .stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>

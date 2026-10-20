@@ -47,7 +47,8 @@
 }
 
 .actions button:hover {
-  background: color-mix(in srgb, var(--color-surface-alt) 75%, var(--color-success) 25%);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-soft-text);
 }
 
 .actions .primary {
@@ -57,5 +58,6 @@
 }
 
 .actions .primary:hover {
-  background: color-mix(in srgb, var(--color-accent) 88%, #ffffff 12%);
+  background: var(--color-link-hover);
+  color: var(--color-accent-contrast);
 }

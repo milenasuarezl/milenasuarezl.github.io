@@ -1,5 +1,0 @@
-Miguel Suarez - Curriculum Vitae
-
-This is a placeholder CV file.
-Replace this file with your final PDF and keep the same path,
-or update src/data/site.ts with the new public path.

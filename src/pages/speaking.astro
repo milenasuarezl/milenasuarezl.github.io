@@ -1,24 +1,138 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { talks, talksByYear } from "../data/talks";
 ---
 
-<BaseLayout title="Speaking">
+<BaseLayout title="Speaking" description="Talks and workshops by Milena Suárez on accessibility, design systems, Angular, and frontend architecture.">
   <section class="page-intro" aria-labelledby="speaking-title">
-    <h1 id="speaking-title">Speaking</h1>
-    <p>Conferences, meetups, and workshops where I share practical learnings.</p>
+    <p class="eyebrow">Speaking</p>
+    <h1 id="speaking-title">Talks & workshops</h1>
+    <p>
+      {talks.length} sessions at conferences, meetups, and company tech talks — from JavaScript basics
+      in Bogotá to accessibility in design systems in Berlin. Want me at your event?
+      <a href="/experience#get-in-touch">Get in touch</a>.
+    </p>
   </section>
 
-  <section aria-labelledby="speaking-events">
-    <h2 id="speaking-events">Recent sessions</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>Accessible by Default</h3>
-        <p>Patterns for embedding accessibility into team workflows.</p>
-      </article>
-      <article class="card">
-        <h3>Fast Frontend in Practice</h3>
-        <p>Real-world strategies to improve metrics and user satisfaction.</p>
-      </article>
-    </div>
-  </section>
+  <div class="timeline">
+    {
+      [...talksByYear.entries()].map(([year, yearTalks]) => (
+        <section class="year" aria-labelledby={`year-${year}`}>
+          <h2 id={`year-${year}`} class="year-label">{year}</h2>
+          <ul class="talk-list">
+            {yearTalks.map((talk) => (
+              <li class="talk">
+                <h3>{talk.title}</h3>
+                <p class="talk-meta">
+                  {talk.event}
+                  {talk.coSpeaker && <> · with {talk.coSpeaker}</>}
+                </p>
+                <div class="talk-footer">
+                  <ul class="chip-list" aria-label="Topics and language">
+                    {talk.topics.map((topic) => (
+                      <li class="chip">{topic}</li>
+                    ))}
+                    <li class="chip chip-warm">
+                      <span aria-hidden="true">{talk.language}</span>
+                      <span class="sr-only">{talk.language === "EN" ? "In English" : "In Spanish"}</span>
+                    </li>
+                  </ul>
+                  {talk.links.length > 0 && (
+                    <ul class="talk-links">
+                      {talk.links.map((link) => (
+                        <li>
+                          <a href={link.href} target="_blank" rel="noreferrer">
+                            {link.label}
+                            <span class="sr-only">: {talk.title} (opens in a new tab)</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
 </BaseLayout>
+
+<style>
+  .timeline {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .year {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .year-label {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-highlight);
+    letter-spacing: 0.04em;
+  }
+
+  .talk-list {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .talk {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .talk h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .talk-meta {
+    margin: var(--space-1) 0 0;
+    color: var(--color-muted);
+  }
+
+  .talk-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  .talk-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-weight: 650;
+  }
+
+  @media (min-width: 48rem) {
+    .year {
+      grid-template-columns: 6rem 1fr;
+      align-items: start;
+    }
+
+    .year-label {
+      position: sticky;
+      top: var(--space-4);
+      padding-top: var(--space-5);
+      font-size: 1.4rem;
+    }
+  }
+</style>

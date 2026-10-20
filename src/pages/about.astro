@@ -1,27 +1,163 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const values = [
+  {
+    title: "Accessibility first",
+    text: "Small, steady steps beat big audits. I help teams bake accessibility into components, reviews, and everyday habits.",
+  },
+  {
+    title: "Design systems as a product",
+    text: "Shared foundations that designers and engineers actually enjoy using — documented, tested, and built to scale.",
+  },
+  {
+    title: "Community & mentoring",
+    text: "Meetups shaped my career. I spent years organizing and speaking in them, and I still love being part of the community and sharing what I learn.",
+  },
+];
+
+const funFacts = [
+  {
+    emoji: "🐈",
+    title: "Cat mom of two",
+    text: "Two cats run my household — and, if they had a say, my calendar too. They're my favourite reviewers: brutally honest and always ready to sit on the keyboard. They know many company secrets — and aren't afraid to share them.",
+  },
+  {
+    emoji: "⛰️",
+    title: "Mountains & pole dance",
+    text: "The mountains give me peace and fresh air. Pole dance gives me strength, confidence, and a lot of laughs (mostly at my own attempts!). Currently working toward nailing those intermediate moves — decent pole dancer in progress.",
+  },
+  {
+    emoji: "🧀",
+    title: "Cheese bread for happiness",
+    text: "Colombian classics like pandebono and almojábana — warm, cheesy breads that comfort the soul. And bún noodles: fresh, herby, always hits the spot. Cheese bread for happiness, noodles for balance.",
+  },
+];
 ---
 
-<BaseLayout title="About">
-  <section class="page-intro" aria-labelledby="about-title">
-    <h1 id="about-title">About</h1>
-    <p>
-      I build web products with a focus on performance, accessibility, and clean
-      system design.
-    </p>
+<BaseLayout title="About" description="About Milena Suárez — frontend engineer, design systems and accessibility advocate, and community member.">
+  <section class="about-hero" aria-labelledby="about-title">
+    <div class="photo-wrap">
+      <img
+        src="/images/profile.jpg"
+        alt="Portrait of Milena Suárez smiling"
+        width="320"
+        height="320"
+        class="photo"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+    <div>
+      <p class="eyebrow">About me</p>
+      <h1 id="about-title">Hola, I'm Milena 👋</h1>
+      <p class="lead">
+        I'm a frontend engineer from Bogotá, Colombia, with 10+ years of experience. Today I work on
+        design systems and accessibility at Babbel in Berlin. I care about interfaces that work for everyone — and about the people and
+        teams who build them.
+      </p>
+      <p class="lead">
+        Long before conference stages, I was organizing BogotaJS, co-organizing JSConf Colombia and
+        Rails Girls Bogotá, and speaking at GDG Bogotá and Women Techmakers. Community is where I
+        learned the most, and I'm still happy to be part of it.
+      </p>
+    </div>
   </section>
 
-  <section aria-labelledby="about-details">
-    <h2 id="about-details">What I care about</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>Accessibility first</h3>
-        <p>Semantic HTML, keyboard support, and robust contrast decisions.</p>
-      </article>
-      <article class="card">
-        <h3>Maintainability</h3>
-        <p>Separation of concerns, reusable components, and clear conventions.</p>
-      </article>
+  <section class="section" aria-labelledby="about-values">
+    <div class="section-head">
+      <p class="eyebrow">What drives me</p>
+      <h2 id="about-values">What I care about</h2>
+    </div>
+    <div class="cards cards-3">
+      {
+        values.map((value) => (
+          <article class="card">
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="about-facts">
+    <div class="section-head">
+      <p class="eyebrow">Beyond the code</p>
+      <h2 id="about-facts">Fun facts about me</h2>
+    </div>
+    <div class="cards cards-3">
+      {
+        funFacts.map((fact) => (
+          <article class="card fact-card">
+            <span class="fact-emoji" aria-hidden="true">{fact.emoji}</span>
+            <h3>{fact.title}</h3>
+            <p>{fact.text}</p>
+          </article>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .about-hero {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .about-hero h1 {
+    margin: 0.3rem 0 0;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+  }
+
+  .lead {
+    margin: var(--space-4) 0 0;
+    max-width: 60ch;
+    color: var(--color-muted);
+    font-size: 1.1rem;
+  }
+
+  .photo-wrap {
+    position: relative;
+    width: min(18rem, 70vw);
+  }
+
+  .photo-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0.9rem -0.9rem -0.9rem 0.9rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
+  }
+
+  .photo {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  .fact-emoji {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: var(--space-3);
+    border-radius: 999px;
+    background: var(--color-highlight-soft);
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 48rem) {
+    .about-hero {
+      grid-template-columns: auto 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>

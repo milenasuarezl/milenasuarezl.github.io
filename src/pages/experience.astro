@@ -1,0 +1,250 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../data/site";
+import { jobs, volunteering, skills, education } from "../data/experience";
+---
+
+<BaseLayout title="Experience" description="Milena Suárez's experience: 10+ years building design systems, accessible interfaces, and frontend platforms, plus years of community work.">
+  <section class="page-intro" aria-labelledby="experience-title">
+    <p class="eyebrow">Experience</p>
+    <h1 id="experience-title">10+ years building for the web</h1>
+    <p>
+      From banking dashboards and startup architectures in Bogotá to design systems and accessibility at
+      Babbel in Berlin, I've spent more than a decade turning complex products into reusable,
+      inclusive interfaces.
+    </p>
+  </section>
+
+  <section aria-labelledby="work-title">
+    <div class="section-head">
+      <h2 id="work-title">Professional experience</h2>
+    </div>
+    <ol class="jobs">
+      {
+        jobs.map((job) => (
+          <li class="job">
+            <div class="job-head">
+              <div>
+                <h3>{job.role}</h3>
+                <p class="job-company">
+                  {job.company} <span class="job-type">· {job.companyType}</span>
+                </p>
+              </div>
+              <p class="chip chip-warm job-period">{job.period}</p>
+            </div>
+            <p class="job-summary">{job.summary}</p>
+            {job.achievements.length > 0 && (
+              <ul class="job-achievements">
+                {job.achievements.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+            <ul class="chip-list" aria-label={`Technologies used at ${job.company}`}>
+              {job.stack.map((tech) => (
+                <li class="chip">{tech}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="community-title">
+    <div class="section-head">
+      <p class="eyebrow">Where I grew</p>
+      <h2 id="community-title">Community & volunteering</h2>
+      <p>
+        Most of my engineering work lives inside product teams, so there aren't many public repos to
+        show. What is public is my community story: years of organizing, mentoring, and
+        <a href="/speaking">speaking</a> at meetups and conferences.
+      </p>
+    </div>
+    <ul class="cards cards-3 plain-list">
+      {
+        volunteering.map((item) => (
+          <li class="card">
+            <h3>{item.name}</h3>
+            <p>{item.role}</p>
+            <p class="period">{item.period}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="skills-title">
+    <div class="section-head">
+      <p class="eyebrow">Toolbox</p>
+      <h2 id="skills-title">Skills</h2>
+    </div>
+    <div class="cards cards-3">
+      {
+        skills.map((skill) => (
+          <section class="card" aria-labelledby={`skill-${skill.group}`}>
+            <h3 id={`skill-${skill.group}`}>{skill.group}</h3>
+            <ul class="chip-list skill-list">
+              {skill.items.map((item) => (
+                <li class="chip">{item}</li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+    <p class="education">
+      <strong>{education.degree}</strong> — {education.school}, {education.period}
+    </p>
+  </section>
+
+  <section id="get-in-touch" class="section contact" aria-labelledby="contact-title">
+    <p class="eyebrow">Let's talk</p>
+    <h2 id="contact-title">Let's work together</h2>
+    <p>
+      Building a design system, improving accessibility, or organizing an event? I'd love to hear
+      about it.
+    </p>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href={siteConfig.social.email}>Get in touch</a>
+      <a class="btn btn-ghost" href={siteConfig.cvPath} download>Download CV (PDF)</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .jobs {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0 0 0 var(--space-6);
+    list-style: none;
+  }
+
+  .jobs::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 0.45rem;
+    width: 2px;
+    background: var(--color-border);
+  }
+
+  .job {
+    position: relative;
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .job::before {
+    content: "";
+    position: absolute;
+    top: 1.75rem;
+    left: calc(-1 * var(--space-6) + 0.1rem);
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+
+  .job-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-2) var(--space-4);
+  }
+
+  .job h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .job-company {
+    margin: var(--space-1) 0 0;
+    font-weight: 650;
+  }
+
+  .job-type {
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .job-period {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .job-summary {
+    margin: var(--space-3) 0 0;
+    color: var(--color-muted);
+  }
+
+  .job-achievements {
+    margin: var(--space-3) 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .job .chip-list {
+    margin-top: var(--space-4);
+  }
+
+  .job-achievements li + li {
+    margin-top: var(--space-1);
+  }
+
+  .plain-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card .period {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-highlight);
+  }
+
+  .skill-list {
+    margin-top: var(--space-3);
+  }
+
+  .education {
+    margin: var(--space-5) 0 0;
+    color: var(--color-muted);
+  }
+
+  .education strong {
+    color: var(--color-text);
+  }
+
+  .contact {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-alt);
+  }
+
+  .contact h2 {
+    margin: 0.25rem 0 0;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+  }
+
+  .contact p:not(.eyebrow) {
+    margin: var(--space-2) 0 0;
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+</style>

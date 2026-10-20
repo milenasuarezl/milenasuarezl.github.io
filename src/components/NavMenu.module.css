@@ -37,7 +37,8 @@
 }
 
 .iconButton:hover {
-  background: color-mix(in srgb, var(--color-surface) 80%, var(--color-success) 20%);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-soft-text);
 }
 
 .iconButton svg {
@@ -75,7 +76,7 @@
 .link {
   display: inline-block;
   padding: 0.4rem 0.75rem;
-  border-radius: 0.45rem;
+  border-radius: 999px;
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
@@ -83,12 +84,14 @@
 }
 
 .link:hover {
-  background: color-mix(in srgb, var(--color-surface-alt) 80%, var(--color-success) 20%);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
 }
 
 .link[aria-current="page"] {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-soft-text);
+  font-weight: 650;
 }
 
 @media (max-width: 42rem) {
