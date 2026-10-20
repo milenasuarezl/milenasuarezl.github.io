@@ -1,6 +1,7 @@
-# Miguel Suarez Personal Site
+# Milena Suárez — Personal Site
 
-Personal website built with Astro and React, focused on writing, talks, and projects.
+Personal website of Milena Suárez, software engineer focused on scalable, accessible frontend solutions. Built with Astro and React.
+
 
 ## Tech Stack
 
@@ -17,8 +18,9 @@ This project follows a layout-plus-pages architecture with one interactive React
 - `src/layouts/BaseLayout.astro` wraps every page with document metadata, theme initialization, global styles, header, footer, and the cookie consent modal mount point.
 
 2. Route pages
-- `src/pages/*.astro` files are top-level routes (`/`, `/about`, `/blog`, `/speaking`, `/projects`).
+- `src/pages/*.astro` files are top-level routes (`/`, `/about`, `/speaking`, `/experience`, `/blog`).
 - Each page composes semantic sections (`section`, `h1`, `h2`, cards) and reuses shared layout styles.
+- Pages render their lists from the data files in `src/data/`, so content changes rarely require touching markup.
 
 3. Reusable Astro components
 - `src/components/Header.astro`, `NavMenu.astro`, `Footer.astro`, and `SocialLinks.astro` provide site chrome and navigation.
@@ -29,11 +31,14 @@ This project follows a layout-plus-pages architecture with one interactive React
 - It handles consent persistence in `localStorage`, focus trapping, and keyboard interactions.
 
 5. Centralized content/config
-- `src/data/site.ts` stores site metadata, nav items, social links, and CV path.
+- `src/data/site.ts` stores site metadata, role tagline, nav items, social links (LinkedIn, GitHub, email), and CV path.
+- `src/data/experience.ts` stores jobs, community & volunteering roles, skills, and education (sourced from the CV).
+- `src/data/talks.ts` stores every talk with year, event, topics, language, and links (video, slides, event, recap).
 
 6. Styling system
-- `src/styles/global.css` defines design tokens (colors, spacing), light/dark themes, resets, accessibility helpers, and shared utility classes.
+- `src/styles/global.css` defines design tokens (colors, spacing, radii), light/dark themes, the top-of-page gradient, resets, accessibility helpers, and shared classes (`.btn`, `.card`, `.cards`, `.chip`, `.eyebrow`, `.section-head`).
 - CSS Modules handle component-local styles to avoid style leakage.
+- Page-specific styles live in `<style>` blocks inside each page.
 
 ## Rendering Strategy: SSG, SSR, ISR, CSR
 
@@ -56,6 +61,25 @@ Current behavior in this repository:
 
 In short: this project is primarily SSG with selective CSR islands.
 
+## Updating content
+
+| To change… | Edit |
+| :--------- | :--- |
+| Name, tagline, nav, social links | `src/data/site.ts` |
+| Add a talk | Add an entry to `talks` in `src/data/talks.ts` (set `featured: true` to highlight it) |
+| Jobs, volunteering, skills | `src/data/experience.ts` |
+| Home page intro, "What I do" cards, stats | `src/pages/index.astro` |
+| Bio and fun facts | `src/pages/about.astro` |
+| CV download | Replace `public/cv-milena-suarez.pdf` (keep the file name) |
+| Profile photo | Replace `public/images/profile.jpg` |
+
+## Accessibility
+
+- Every text/background color pair in both themes meets WCAG 2.2 AA (4.5:1); body text and links meet AAA (7:1). When changing tokens in `global.css`, re-check contrast for both light and dark themes.
+- Keyboard: skip link, visible focus ring in both themes, focus-trapped cookie dialog.
+- External links announce "opens in a new tab" to screen readers; decorative icons are `aria-hidden`.
+- Animations are disabled when the user prefers reduced motion.
+
 ## Commands
 
 All commands are run from project root:
@@ -67,6 +91,8 @@ All commands are run from project root:
 | `npm run build` | Build static production output |
 | `npm run preview` | Preview production build locally |
 | `npm run astro -- --help` | Show Astro CLI help |
+
+The Astro dev toolbar is disabled in `astro.config.mjs` (`devToolbar.enabled: false`).
 
 ## Testing
 
