@@ -18,19 +18,25 @@ const values = [
 
 const funFacts = [
   {
-    emoji: "🐈",
+    image: { src: "/images/cats.jpg", alt: "Two tabby cats sitting side by side on a teal sofa" },
     title: "Cat mom of two",
-    text: "Two cats run my household — and, if they had a say, my calendar too. They're my favourite reviewers: brutally honest and always ready to sit on the keyboard. They know many company secrets — and aren't afraid to share them.",
+    text: "Two cats run my household and, if they had a say, my calendar too. They're my favourite reviewers: brutally honest and always ready to sit on the keyboard. They know many company secrets, and aren't afraid to share them.",
   },
   {
-    emoji: "⛰️",
+    image: {
+      src: "/images/mountains.jpg",
+      alt: "Milena Suárez striking a playful leg-up pose on a stone terrace in front of green jungle mountains",
+    },
     title: "Mountains & pole dance",
-    text: "The mountains give me peace and fresh air. Pole dance gives me strength, confidence, and a lot of laughs (mostly at my own attempts!). Currently working toward nailing those intermediate moves — decent pole dancer in progress.",
+    text: "The mountains give me peace and fresh air. Pole dance gives me strength, confidence, and a lot of laughs (mostly at my own attempts!). Currently working toward nailing those basic moves, decent pole dancer in progress.",
   },
   {
-    emoji: "🧀",
-    title: "Cheese bread for happiness",
-    text: "Colombian classics like pandebono and almojábana — warm, cheesy breads that comfort the soul. And bún noodles: fresh, herby, always hits the spot. Cheese bread for happiness, noodles for balance.",
+    image: {
+      src: "/images/coffee.jpg",
+      alt: "Two milky coffees on a café table next to a basket of pandebono and almojábanas",
+    },
+    title: "Coffee & cheese bread",
+    text: "A good Colombian coffee with a warm almojábana or pandebono is my idea of happiness. Cheesy, fresh from the oven, and a little taste of home wherever I am.",
   },
 ];
 ---
@@ -39,10 +45,10 @@ const funFacts = [
   <section class="about-hero" aria-labelledby="about-title">
     <div class="photo-wrap">
       <img
-        src="/images/profile.jpg"
-        alt="Portrait of Milena Suárez smiling"
-        width="320"
-        height="320"
+        src="/images/milena-jumping.jpg"
+        alt="Milena Suárez jumping with arms wide open on a dirt road lined with baobab trees"
+        width="600"
+        height="800"
         class="photo"
         loading="eager"
         decoding="async"
@@ -53,11 +59,11 @@ const funFacts = [
       <h1 id="about-title">Hola, I'm Milena 👋</h1>
       <p class="lead">
         I'm a frontend engineer from Bogotá, Colombia, with 10+ years of experience. Today I work on
-        design systems and accessibility at Babbel in Berlin. I care about interfaces that work for everyone — and about the people and
+        design systems and accessibility at Babbel in Berlin. I care about interfaces that work for everyone, and about the people and
         teams who build them.
       </p>
       <p class="lead">
-        Long before conference stages, I was organizing BogotaJS, co-organizing JSConf Colombia and
+        I was organizing BogotaJS, co-organizing JSConf Colombia and
         Rails Girls Bogotá, and speaking at GDG Bogotá and Women Techmakers. Community is where I
         learned the most, and I'm still happy to be part of it.
       </p>
@@ -90,7 +96,15 @@ const funFacts = [
       {
         funFacts.map((fact) => (
           <article class="card fact-card">
-            <span class="fact-emoji" aria-hidden="true">{fact.emoji}</span>
+            <img
+              src={fact.image.src}
+              alt={fact.image.alt}
+              width="800"
+              height="600"
+              class="fact-photo"
+              loading="lazy"
+              decoding="async"
+            />
             <h3>{fact.title}</h3>
             <p>{fact.text}</p>
           </article>
@@ -109,7 +123,7 @@ const funFacts = [
 
   .about-hero h1 {
     margin: 0.3rem 0 0;
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-size: clamp(1.75rem, 3.5vw, 2.4rem);
   }
 
   .lead {
@@ -118,46 +132,52 @@ const funFacts = [
     color: var(--color-muted);
     font-size: 1.1rem;
   }
-
   .photo-wrap {
     position: relative;
-    width: min(18rem, 70vw);
-  }
-
-  .photo-wrap::before {
-    content: "";
-    position: absolute;
-    inset: 0.9rem -0.9rem -0.9rem 0.9rem;
-    border-radius: var(--radius-lg);
-    background: var(--color-accent-soft);
-    border: 1px solid var(--color-border);
+    justify-self: center;
+    width: min(18rem, 100%);
+    aspect-ratio: 3 / 4;
   }
 
   .photo {
-    position: relative;
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 1;
+    height: 100%;
     object-fit: cover;
+    object-position: center 40%;
     border-radius: var(--radius-lg);
   }
 
-  .fact-emoji {
-    display: inline-grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    margin-bottom: var(--space-3);
-    border-radius: 999px;
-    background: var(--color-highlight-soft);
-    font-size: 1.4rem;
+  /* Clip the edge-to-edge photo to the card's rounded corners. */
+  .fact-card {
+    overflow: hidden;
+  }
+
+  /* Cancel the card padding so the photo reaches the card borders. */
+  .fact-photo {
+    display: block;
+    width: calc(100% + 2 * var(--space-5));
+    max-width: none;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) var(--space-4);
+    object-fit: cover;
   }
 
   @media (min-width: 48rem) {
     .about-hero {
-      grid-template-columns: auto 1fr;
+      /* Size the text column to the 60ch paragraphs and center both columns. */
+      grid-template-columns: 12rem minmax(0, 60ch);
+      justify-content: center;
+      align-items: stretch;
       gap: var(--space-8);
+    }
+
+    /* Match the photo's height to the text column next to it. */
+    .photo-wrap {
+      width: 100%;
+      aspect-ratio: auto;
     }
   }
 </style>

@@ -35,20 +35,31 @@ const stats = [
 ];
 ---
 
-<BaseLayout title="Home">
+<BaseLayout>
   <section class="hero" aria-labelledby="home-title">
-    <p class="eyebrow">{siteConfig.role}</p>
-    <h1 id="home-title">
-      Interfaces that work for <span class="hero-mark">everyone.</span>
-    </h1>
-    <p class="hero-lead">
-      I'm Milena, a software engineer based in Berlin, focused on frontend. I solve product problems
-      with <strong>scalable</strong> and <strong>accessible</strong> solutions — from design systems
-      to production-ready apps.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="/experience">My experience</a>
-      <a class="btn btn-ghost" href="/about">About me</a>
+    <div class="hero-info">
+      <h1 id="home-title" class="sr-only">{siteConfig.name}</h1>
+      <p class="hero-lead">
+        I'm Milena, a software engineer based in Berlin, focused on frontend. I solve product problems
+        with <strong>scalable</strong> and <strong>accessible</strong> solutions — from design systems
+        to production-ready apps.
+      </p>
+      <p class="eyebrow">{siteConfig.role}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/experience">My experience</a>
+        <a class="btn btn-ghost" href="/about">About me</a>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <img
+        src="/images/profile.jpg"
+        alt="Portrait of Milena Suárez smiling"
+        width="220"
+        height="220"
+        class="photo"
+        loading="eager"
+        decoding="async"
+      />
     </div>
   </section>
 
@@ -114,24 +125,30 @@ const stats = [
 
 <style>
   .hero {
-    padding-block: var(--space-8) var(--space-4);
-    max-width: 52rem;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    padding-top: var(--space-8);
   }
 
-  .hero h1 {
-    margin: var(--space-3) 0 0;
-    font-size: clamp(2.6rem, 7vw, 4.6rem);
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+  .hero-info {
+    max-width: 36rem;
   }
 
-  .hero-mark {
-    color: var(--color-accent);
-    font-style: italic;
+  @media (min-width: 48rem) {
+    .hero {
+      flex-direction: row;
+    }
+  }
+
+  .hero .eyebrow {
+    margin-top: var(--space-5);
   }
 
   .hero-lead {
-    margin: var(--space-5) 0 0;
+    margin: 0;
     max-width: 52ch;
     color: var(--color-muted);
     font-size: clamp(1.1rem, 1.6vw, 1.25rem);
@@ -146,6 +163,20 @@ const stats = [
     flex-wrap: wrap;
     gap: var(--space-3);
     margin-top: var(--space-6);
+  }
+
+  .photo-wrap {
+    flex-shrink: 0;
+    width: min(13.75rem, 70vw);
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .current {

@@ -10,10 +10,12 @@ export const siteConfig = {
     { href: "/about", label: "About" },
     { href: "/speaking", label: "Speaking" },
     { href: "/experience", label: "Experience" },
+    { href: "/blog", label: "Blog" },
   ],
   social: {
     linkedin: "https://www.linkedin.com/in/milenasuarezl",
     github: "https://github.com/milenasuarezl",
+    instagram: "https://www.instagram.com/milenasuarezl",
     email: "mailto:milena.suarez.luna@gmail.com",
   },
   cvPath: "/cv-milena-suarez.pdf",

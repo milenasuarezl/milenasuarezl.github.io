@@ -208,4 +208,3 @@ export const communities = [...new Set(talks.map((talk) => talk.community))].fil
   (name) => name !== "Colpatria",
 );
 
-export const firstTalkYear = Math.min(...talks.map((talk) => talk.year));
