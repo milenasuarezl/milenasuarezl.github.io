@@ -30,6 +30,9 @@
   --cat-eye-stroke: #1d2a12;
   --cat-nose: #f49aa3;
   --cat-paw-highlight: #ffffff;
+  /* Shared heading sizes: h1 tops out at 38px, h2 at 28px. */
+  --font-size-h1: clamp(1.75rem, 3.5vw, 2.4rem);
+  --font-size-h2: clamp(1.35rem, 2.5vw, 1.75rem);
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -41,9 +44,11 @@
   color-scheme: light;
 }
 
+/* Logo font: Great Vibes (SIL OFL 1.1), subset to the letters in "Milena Suárez".
+   If the logo text changes, download a new subset that includes the new letters. */
 @font-face {
-  font-family: "Ananda Black";
-  src: url("/fonts/ananda-black/AnandaBlackPersonalUseRegular-rg9Rx.ttf") format("truetype");
+  font-family: "Great Vibes";
+  src: url("/fonts/great-vibes/great-vibes-milena-suarez.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -149,12 +154,11 @@ p {
 
 .page-intro {
   margin-bottom: var(--space-8);
-  max-width: 44rem;
 }
 
 .page-intro h1 {
   margin: 0.3rem 0 0;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-size: var(--font-size-h1);
 }
 
 .page-intro p:not(.eyebrow) {
@@ -165,7 +169,7 @@ p {
 
 .eyebrow {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -183,7 +187,7 @@ p {
 
 .section-head h2 {
   margin: 0.25rem 0 0;
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-size: var(--font-size-h2);
 }
 
 .section-head p:not(.eyebrow) {
@@ -230,7 +234,7 @@ p {
   align-items: center;
   border-radius: 999px;
   padding: 0.15rem 0.65rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   background: var(--color-accent-soft);
   color: var(--color-accent-soft-text);
